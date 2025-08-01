@@ -39,7 +39,17 @@ For Software:
 
 ### Project Documentation
 For Software:
+### 🧠 Project Overview
+**"The Leaf That Knows"** is a humorous web-based application where users can ask a (partially dead) plant any question. Instead of useful answers, the plant replies with unrelated, sarcastic, or absurd wisdom. The goal is to create an interactive experience that’s both useless and entertaining.
 
+---
+
+### 🔧 Features
+- Interactive Q&A interface with a sarcastic plant
+- Randomized plant responses with varying sass levels
+- Plant stats: **Sass Level**, **Wisdom**, **Confusion**
+- Easter egg: Click the plant to reveal its **Death Certificate**
+- Emoji feedback on plant responses
 # Screenshots (Add at least 3)
 
 <img width="1362" height="766" alt="firts" src="https://github.com/user-attachments/assets/9be48ac8-4283-42f9-a3d2-5743ff08c7af" />
