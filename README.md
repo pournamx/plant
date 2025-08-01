@@ -65,14 +65,47 @@ For Hardware:
 *Add caption explaining the schematic*
 
 # Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
+## 🌿 Build Photos
 
-![Build](Add photos of build process here)
-*Explain the build steps*
+### 📸 Components
+<img width="1365" height="766" alt="Screenshot 2025-08-02 003732" src="https://github.com/user-attachments/assets/6452e4c3-7908-4c38-b137-be3b5b671a04" />
 
-![Final](Add photo of final product here)
-*Explain the final build*
+**List of Components:**
+- 💻 **VS Code** – Code editor for building the project
+- 🌐 **HTML/CSS** – Structure and styling of the plant interface
+- 🧠 **JavaScript** – Logic for generating sarcastic plant responses
+- 🌈 **Emojis** – Display plant emotions and vitals
+- 🌍 **Web Browser** – For running and testing the app
+- 🪴 **Creativity & Humor** – The true core components
+
+---
+
+### 🛠️ Build Process
+
+**Steps Followed:**
+1. Designed the layout and plant UI using HTML & CSS
+2. Added interactive input field for user questions
+3. Wrote JavaScript to generate random and unrelated responses
+4. Created plant vitals like **Sass Level**, **Wisdom**, and **Confusion**
+5. Implemented emoji reactions and mood shifts
+6. Added a hidden **Death Certificate** Easter egg when clicking the plant
+7. Tested edge cases and enhanced plant behavior
+8. Final polish with styling and touch of absurdity
+
+---
+
+### 🌱 Final Build
+<img width="1365" height="756" alt="Screenshot 2025-08-01 235819" src="https://github.com/user-attachments/assets/a3270006-d969-4096-948f-d566211a41fc" />
+**What It Looks Like:**
+- A humorous web app where a **partially dead plant** gives completely unhelpful advice
+- Displays quirky stats and sarcastic responses
+- Includes secret interactions for curious users (e.g., clicking the plant)
+- Brings humor to life through a dying leaf
+
+---
+
+📝 **Note**: This project was built individually by **Pournami Hari Lakshmi**, from concept to execution.
+
 
 ### Project Demo
 # Video
@@ -89,9 +122,6 @@ In the video:
 
 - A hidden feature is revealed — a humorous death certificate of the plant, declaring it partially deceased due to "chronic positivity overload."
 This demonstration highlights the absurdity and humor behind the concept, making it an entertaining "useless" project with interactive elements and Easter eggs.
-
-# Additional Demos
-[Add any extra demo materials/links]
 
 ## Team Contributions
 Pournami Hari Lakshmi:
