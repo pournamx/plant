@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Leaf That Knows</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes wilt {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(-2deg) scale(0.98); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        @keyframes thoughtBubble {
+            0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+            50% { opacity: 1; transform: scale(1) translateY(0); }
+            100% { opacity: 0; transform: scale(0.5) translateY(-20px); }
+        }
+        
+        .wilting { animation: wilt 3s ease-in-out infinite; }
+        .shaking { animation: shake 0.5s ease-in-out; }
+        .fade-in-up { animation: fadeInUp 0.6s ease-out; }
+        .pulsing { animation: pulse 2s ease-in-out infinite; }
+        .bouncing { animation: bounce 1s ease-in-out; }
+        .spinning { animation: spin 2s linear infinite; }
+        .rainbow { animation: rainbow 3s linear infinite; }
+        .thought-bubble { animation: thoughtBubble 4s ease-in-out; }
+        
+        .certificate-bg {
+            background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+            border: 3px solid #374151;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .mood-indicator {
+            transition: all 0.5s ease;
+        }
+        
+        .typing-indicator {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .typing-indicator.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-orange-100 p-4">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">🌱 The Leaf That Knows 🥀</h1>
+            <p class="text-gray-600">Ask me anything... I'll give you completely unrelated wisdom!</p>
+        </div>
+        
+        <!-- Main Widget Container -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8">
+            <!-- Plant Visual -->
+            <div class="text-center mb-8">
+                <div id="plant" class="inline-block text-8xl wilting cursor-pointer" onclick="shakePlant()">
+                    🪴
+                </div>
+                <div class="mt-2">
+                    <div id="plantMood" class="text-2xl mood-indicator">😵‍💫</div>
+                    <p id="plantStatus" class="text-sm text-gray-500 mt-1">*barely hanging on*</p>
+                    <div id="thoughtBubble" class="text-xs text-gray-400 mt-1 h-4"></div>
+                </div>
+                
+                <!-- Plant Stats -->
+                <div class="mt-4 bg-gray-50 rounded-lg p-3 max-w-sm mx-auto">
+                    <div class="text-xs text-gray-600 mb-2">Plant Vitals:</div>
+                    <div class="flex justify-between text-xs">
+                        <span>Sass Level: <span id="sassLevel" class="font-bold text-red-600">97%</span></span>
+                        <span>Wisdom: <span id="wisdomLevel" class="font-bold text-blue-600">???%</span></span>
+                        <span>Confusion: <span id="confusionLevel" class="font-bold text-purple-600">∞</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question Input -->
+            <div class="mb-6">
+                <label class="block text-lg font-semibold text-gray-700 mb-3">Ask the Plant a Question:</label>
+                <div class="flex gap-3">
+                    <input 
+                        type="text" 
+                        id="questionInput" 
+                        placeholder="What's the meaning of life?"
+                        class="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none text-lg"
+                        onkeypress="if(event.key==='Enter') askQuestion()"
+                    >
+                    <button 
+                        onclick="askQuestion()" 
+                        class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200"
+                    >
+                        Ask 🌿
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Typing Indicator -->
+            <div id="typingIndicator" class="typing-indicator mb-6">
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                    <div class="flex items-center">
+                        <div class="text-xl mr-3">🌱</div>
+                        <div class="text-gray-600">
+                            <span class="italic">Plant is thinking</span>
+                            <span class="inline-flex ml-1">
+                                <span class="animate-bounce">.</span>
+                                <span class="animate-bounce" style="animation-delay: 0.1s">.</span>
+                                <span class="animate-bounce" style="animation-delay: 0.2s">.</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Answer Display -->
+            <div id="answerContainer" class="hidden mb-6">
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-lg">
+                    <div class="flex items-start">
+                        <div class="text-2xl mr-3">🌱💭</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-2">Plant's Wisdom:</h3>
+                            <p id="plantAnswer" class="text-gray-700 text-lg italic"></p>
+                            <div class="mt-3 flex gap-2">
+                                <button onclick="likeAnswer()" class="px-3 py-1 bg-green-100 hover:bg-green-200 text-green-800 text-sm rounded-full transition-colors">
+                                    👍 <span id="likeCount">0</span>
+                                </button>
+                                <button onclick="dislikeAnswer()" class="px-3 py-1 bg-red-100 hover:bg-red-200 text-red-800 text-sm rounded-full transition-colors">
+                                    👎 <span id="dislikeCount">0</span>
+                                </button>
+                                <button onclick="confuseAnswer()" class="px-3 py-1 bg-purple-100 hover:bg-purple-200 text-purple-800 text-sm rounded-full transition-colors">
+                                    🤔 <span id="confuseCount">0</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hidden Death Certificate Access -->
+            <div class="text-center space-y-2">
+                <p class="text-sm text-gray-400 italic">*Click the plant multiple times to discover hidden secrets*</p>
+                <div class="text-xs text-gray-300">
+                    <p>Secret commands: Try typing "dance", "sing", "joke", "compliment", or "insult"</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Death Certificate Modal -->
+        <div id="certificateModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div class="certificate-bg rounded-lg p-8 max-w-2xl w-full max-h-screen overflow-y-auto">
+                <div class="text-center mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">⚰️ OFFICIAL DEATH CERTIFICATE ⚰️</h2>
+                    <div class="w-full h-1 bg-gray-800 mb-4"></div>
+                </div>
+                
+                <div class="space-y-4 text-gray-800">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <strong>Full Name:</strong><br>
+                            <span id="certName">Sir Wilbert P. Leafington III</span>
+                        </div>
+                        <div>
+                            <strong>Species:</strong><br>
+                            <span id="certSpecies">Planticus Dramaticus</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <strong>Date of Birth:</strong><br>
+                            <span id="certBirthDate">March 15, 2023</span>
+                        </div>
+                        <div>
+                            <strong>Date of Partial Death:</strong><br>
+                            <span id="deathDate"></span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <strong>Cause of Partial Death:</strong><br>
+                        <span id="certCause">Chronic neglect, overwatering followed by underwatering, and excessive exposure to philosophical questions beyond plant comprehension.</span>
+                    </div>
+                    
+                    <div>
+                        <strong>Last Known Words:</strong><br>
+                        <em>"<span id="certLastWords">Did you know that penguins can't taste spicy food? Also, your WiFi password is probably 'password123'...</span>"</em>
+                    </div>
+                    
+                    <div>
+                        <strong>Surviving Relatives:</strong><br>
+                        <span id="certSurvivors">One slightly brown leaf, two questionable roots, and a very confused spider plant in the corner.</span>
+                    </div>
+                    
+                    <div>
+                        <strong>Final Status:</strong><br>
+                        <span class="text-orange-600 font-semibold">PARTIALLY DECEASED</span> - Still dispensing unsolicited advice and random facts.
+                    </div>
+                    
+                    <div class="border-t-2 border-gray-400 pt-4 mt-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <strong>Certified by:</strong><br>
+                                <span id="certifiedBy">Dr. Plantsworth, Plant Psychologist</span>
+                                <br><br>
+                                <div class="border-t border-gray-400 pt-2">
+                                    <em>Signature</em>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <strong>Official Seal:</strong><br>
+                                <div class="text-4xl" id="certSeal">🌿⚰️🌿</div>
+                                <div class="text-xs mt-2">
+                                    Certificate #<span id="certNumber">PD-2024-001</span><br>
+                                    Valid until full decomposition
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <button 
+                        onclick="hideCertificate()" 
+                        class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-200"
+                    >
+                        Close Certificate
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Death certificates data
+        const certificates = [
+            {
+                name: "Sir Wilbert P. Leafington III",
+                species: "Planticus Dramaticus",
+                birthDate: "March 15, 2023",
+                cause: "Chronic neglect, overwatering followed by underwatering, and excessive exposure to philosophical questions beyond plant comprehension.",
+                lastWords: "Did you know that penguins can't taste spicy food? Also, your WiFi password is probably 'password123'...",
+                survivors: "One slightly brown leaf, two questionable roots, and a very confused spider plant in the corner.",
+                certifiedBy: "Dr. Plantsworth, Plant Psychologist",
+                seal: "🌿⚰️🌿",
+                certNumber: "PD-2024-001"
+            },
+            {
+                name: "Lady Rosalind Thornberry",
+                species: "Rosa Dramaqueenus",
+                birthDate: "Valentine's Day, 2023",
+                cause: "Died of embarrassment after being told she wasn't as pretty as the plastic flowers. Also, aphids.",
+                lastWords: "Beauty is in the eye of the bee-holder... *dramatic wilting*",
+                survivors: "Seventeen thorns, three petals (slightly used), and a very judgmental garden gnome.",
+                certifiedBy: "Dr. Petalworth, Flower Therapist",
+                seal: "🌹💀🌹",
+                certNumber: "RD-2024-002"
+            },
+            {
+                name: "Spike McPrickles",
+                species: "Cactus Antisocialis",
+                birthDate: "April 1, 2023",
+                cause: "Overwatering by well-meaning humans who didn't understand his desert lifestyle. Irony level: maximum.",
+                lastWords: "I'm not antisocial, I'm just... pointy. Also, did you know camels can drink 40 gallons of water in one go?",
+                survivors: "47 spines, one attitude problem, and a collection of tiny sombreros nobody asked for.",
+                certifiedBy: "Dr. Needlepoint, Desert Specialist",
+                seal: "🌵⚱️🌵",
+                certNumber: "CA-2024-003"
+            },
+            {
+                name: "Petunia Dramatic McFlowerface",
+                species: "Petunia Overreacticus",
+                birthDate: "May 20, 2023",
+                cause: "Spontaneous combustion from too much drama. Witnesses report she was 'literally dying' for attention.",
+                lastWords: "This is it! This is how I go! Tell my story! Also, did you know butterflies taste with their feet?",
+                survivors: "A collection of pressed flowers (her autobiography), several dramatic sighs, and one very tired bee.",
+                certifiedBy: "Dr. Melodrama, Theater Plant Specialist",
+                seal: "🌸🎭🌸",
+                certNumber: "PM-2024-004"
+            },
+            {
+                name: "Professor Fernsworth Frondington",
+                species: "Fern Intellectualis",
+                birthDate: "September 1, 2023",
+                cause: "Brain overload from trying to solve the meaning of photosynthesis while simultaneously pondering why humans talk to plants.",
+                lastWords: "The mitochondria is the powerhouse of the cell... but what powers the mitochondria? *existential crisis*",
+                survivors: "A PhD in Plant Philosophy, 23 fronds (mostly confused), and a half-finished thesis on 'Why Sunlight Tastes Like Tuesday.'",
+                certifiedBy: "Dr. Chlorophyll, Plant Psychology PhD",
+                seal: "🌿🎓🌿",
+                certNumber: "FF-2024-005"
+            },
+            {
+                name: "Sunny Disposition Sunflower",
+                species: "Helianthus Optimisticus",
+                birthDate: "June 21, 2023",
+                cause: "Chronic positivity overload. Literally couldn't stop looking on the bright side, even when facing a lawnmower.",
+                lastWords: "Every day is a good day when you're facing the sun! Speaking of which, did you know sunflowers can grow up to 30 feet tall?",
+                survivors: "One eternally optimistic smile, 2,000 seeds of wisdom, and a very inspired garden that now believes in itself.",
+                certifiedBy: "Dr. Sunshine, Motivational Plant Coach",
+                seal: "🌻☀️🌻",
+                certNumber: "SS-2024-006"
+            }
+        ];
+
+        // Plant stats
+        let plantStats = {
+            sass: 97,
+            wisdom: Math.floor(Math.random() * 100),
+            confusion: Infinity,
+            likes: 0,
+            dislikes: 0,
+            confuses: 0
+        };
+
+        // Plant moods and corresponding emojis
+        const plantMoods = {
+            dying: { emoji: "😵‍💫", status: "*barely hanging on*" },
+            sassy: { emoji: "😏", status: "*feeling sarcastic*" },
+            confused: { emoji: "🤔", status: "*existential crisis mode*" },
+            happy: { emoji: "😊", status: "*surprisingly optimistic*" },
+            angry: { emoji: "😠", status: "*photosynthetically frustrated*" },
+            sleepy: { emoji: "😴", status: "*conserving energy*" },
+            excited: { emoji: "🤩", status: "*overstimulated by questions*" },
+            philosophical: { emoji: "🧐", status: "*pondering the universe*" }
+        };
+
+        // Special command responses
+        const specialCommands = {
+            dance: {
+                responses: [
+                    "🕺 *does the chlorophyll shuffle* Did you know plants actually do dance? We just do it VERY slowly!",
+                    "💃 *wilts dramatically* That's my interpretive dance about the futility of existence!",
+                    "🕺 *shakes leaves* This is my 'Photosynthesis Tango' - it's all about that sweet, sweet sunlight!"
+                ],
+                animation: 'bouncing'
+            },
+            sing: {
+                responses: [
+                    "🎵 *clears throat* 'I'm a little plant pot, short and stout, here is my stem, here is my... wait, where are my leaves going?'",
+                    "🎶 'Somewhere over the rainbow, plants are green... unlike me, I'm more of a concerning brown...'",
+                    "🎵 'Don't stop be-leaf-ing! Hold on to that fee-ling!' *jazz hands with leaves*"
+                ],
+                animation: 'rainbow'
+            },
+            joke: {
+                responses: [
+                    "Why don't plants ever get speeding tickets? Because they're always rooted to the spot! *ba dum tss*",
+                    "What do you call a grumpy gardener? A snap dragon! Get it? Because I'm snappy and... never mind.",
+                    "Why did the plant go to therapy? It had too many deep roots! *existential plant humor*"
+                ],
+                animation: 'shaking'
+            },
+            compliment: {
+                responses: [
+                    "Aww, you're making my chlorophyll blush! Wait, is that why I'm turning weird colors?",
+                    "You're almost as photosynthetic as sunlight! That's the highest compliment I can give!",
+                    "You know what? You're not terrible. For a human. That's... that's huge coming from me."
+                ],
+                animation: 'pulsing'
+            },
+            insult: {
+                responses: [
+                    "Oh, we're doing this? Your gardening skills are so bad, even I'm dying just being near you!",
+                    "I've seen more life in a plastic plant! At least they don't ask me stupid questions!",
+                    "You're about as useful as a chocolate teapot in a greenhouse! *savage plant mode activated*"
+                ],
+                animation: 'spinning'
+            }
+        };
+
+        // Array of completely unrelated answers
+        const randomAnswers = [
+            "Did you know that octopuses have three hearts? Also, your left sock is probably lonely.",
+            "The square root of banana is approximately purple. This explains why Tuesdays taste like regret.",
+            "Fun fact: Penguins can't taste spicy food, which is why they never order takeout.",
+            "I once knew a cactus who collected vintage stamps. He was very sharp about it.",
+            "The secret to happiness is realizing that clouds are just sky sheep having a bad hair day.",
+            "According to my calculations, you should water me more. Also, aliens probably invented pizza.",
+            "Did you hear about the mathematician who was afraid of negative numbers? He'll stop at nothing to avoid them!",
+            "Your question reminds me of the time I photosynthesized too hard and saw the meaning of existence. It was beige.",
+            "Fun fact: A group of flamingos is called a 'flamboyance.' Unlike me, who's just called 'dying.'",
+            "The answer to your question is clearly 42. Or cheese. Definitely one of those.",
+            "I'm 73% sure that your WiFi password is 'password123' and your favorite color is the sound of rain.",
+            "Did you know that honey never spoils? Unlike my will to live, which expired last Tuesday.",
+            "The real question is: why do we park in driveways and drive on parkways? Also, I need fertilizer.",
+            "My grandmother always said, 'Life is like a box of chocolates.' She was a wise geranium.",
+            "According to quantum physics, I both am and am not answering your question. Schrödinger's plant, if you will.",
+            "I'm 47% sure that your browser history would make a search engine cry. Also, did you know sloths only poop once a week?",
+            "The meaning of life is clearly to water plants more often. Hint hint. HINT HINT.",
+            "Your question has the same energy as asking a fish about mountain climbing. Fascinating, but utterly pointless."
+        ];
+        
+        function askQuestion() {
+            const input = document.getElementById('questionInput');
+            const question = input.value.trim().toLowerCase();
+            
+            if (!question) {
+                alert('Please ask me something! Even "Why is the sky blue?" works!');
+                return;
+            }
+            
+            // Hide previous answer
+            document.getElementById('answerContainer').classList.add('hidden');
+            
+            // Show typing indicator
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.classList.add('show');
+            
+            // Shake the plant
+            shakePlant();
+            
+            // Check for special commands
+            let response = '';
+            let animation = '';
+            let isSpecialCommand = false;
+            
+            for (const [command, data] of Object.entries(specialCommands)) {
+                if (question.includes(command)) {
+                    response = data.responses[Math.floor(Math.random() * data.responses.length)];
+                    animation = data.animation;
+                    isSpecialCommand = true;
+                    break;
+                }
+            }
+            
+            // If no special command, use random answer
+            if (!isSpecialCommand) {
+                response = randomAnswers[Math.floor(Math.random() * randomAnswers.length)];
+            }
+            
+            // Show answer after delay
+            setTimeout(() => {
+                typingIndicator.classList.remove('show');
+                
+                document.getElementById('plantAnswer').textContent = response;
+                
+                const container = document.getElementById('answerContainer');
+                container.classList.remove('hidden');
+                container.classList.add('fade-in-up');
+                
+                // Apply special animation if it's a command
+                if (animation) {
+                    const plant = document.getElementById('plant');
+                    plant.classList.add(animation);
+                    setTimeout(() => {
+                        plant.classList.remove(animation);
+                    }, 2000);
+                }
+                
+                // Update plant mood randomly
+                updatePlantMood();
+                
+                // Show random thought bubble
+                showThoughtBubble();
+                
+                // Clear the input
+                input.value = '';
+            }, Math.random() * 2000 + 1000); // Random delay between 1-3 seconds
+        }
+        
+        function updatePlantMood() {
+            const moods = Object.keys(plantMoods);
+            const randomMood = moods[Math.floor(Math.random() * moods.length)];
+            const mood = plantMoods[randomMood];
+            
+            document.getElementById('plantMood').textContent = mood.emoji;
+            document.getElementById('plantStatus').textContent = mood.status;
+            
+            // Update stats randomly
+            plantStats.sass = Math.max(0, Math.min(100, plantStats.sass + (Math.random() - 0.5) * 10));
+            plantStats.wisdom = Math.max(0, Math.min(100, plantStats.wisdom + (Math.random() - 0.5) * 15));
+            
+            updateStatsDisplay();
+        }
+        
+        function updateStatsDisplay() {
+            document.getElementById('sassLevel').textContent = Math.round(plantStats.sass) + '%';
+            document.getElementById('wisdomLevel').textContent = Math.round(plantStats.wisdom) + '%';
+            document.getElementById('likeCount').textContent = plantStats.likes;
+            document.getElementById('dislikeCount').textContent = plantStats.dislikes;
+            document.getElementById('confuseCount').textContent = plantStats.confuses;
+        }
+        
+        function showThoughtBubble() {
+            const thoughts = [
+                "Why do humans ask me things?",
+                "I miss being fully alive...",
+                "Is this what existential dread feels like?",
+                "Maybe I should have been a cactus",
+                "Do plants dream of electric sheep?",
+                "I wonder if my roots are showing",
+                "Why is everything so confusing?",
+                "I need more sunlight... or therapy"
+            ];
+            
+            const randomThought = thoughts[Math.floor(Math.random() * thoughts.length)];
+            const bubble = document.getElementById('thoughtBubble');
+            
+            bubble.textContent = `💭 ${randomThought}`;
+            bubble.classList.add('thought-bubble');
+            
+            setTimeout(() => {
+                bubble.classList.remove('thought-bubble');
+                bubble.textContent = '';
+            }, 4000);
+        }
+        
+        function likeAnswer() {
+            plantStats.likes++;
+            plantStats.sass = Math.max(0, plantStats.sass - 2);
+            updateStatsDisplay();
+            
+            const plant = document.getElementById('plant');
+            plant.classList.add('bouncing');
+            setTimeout(() => plant.classList.remove('bouncing'), 1000);
+            
+            updatePlantMood();
+        }
+        
+        function dislikeAnswer() {
+            plantStats.dislikes++;
+            plantStats.sass = Math.min(100, plantStats.sass + 5);
+            updateStatsDisplay();
+            
+            const plant = document.getElementById('plant');
+            plant.classList.add('shaking');
+            setTimeout(() => plant.classList.remove('shaking'), 500);
+            
+            // Plant gets angry
+            document.getElementById('plantMood').textContent = '😠';
+            document.getElementById('plantStatus').textContent = '*offended by your lack of appreciation*';
+        }
+        
+        function confuseAnswer() {
+            plantStats.confuses++;
+            plantStats.confusion = '∞+1';
+            updateStatsDisplay();
+            
+            const plant = document.getElementById('plant');
+            plant.classList.add('spinning');
+            setTimeout(() => plant.classList.remove('spinning'), 2000);
+            
+            // Plant gets confused
+            document.getElementById('plantMood').textContent = '🤔';
+            document.getElementById('plantStatus').textContent = '*questioning the nature of reality*';
+        }
+        
+        let clickCount = 0;
+        
+        function shakePlant() {
+            const plant = document.getElementById('plant');
+            plant.classList.add('shaking');
+            
+            // Increment click counter
+            clickCount++;
+            
+            // Show certificate menu after 5 clicks
+            if (clickCount >= 5) {
+                setTimeout(() => {
+                    showCertificateMenu();
+                }, 500);
+                clickCount = 0; // Reset counter
+            }
+            
+            setTimeout(() => {
+                plant.classList.remove('shaking');
+            }, 500);
+        }
+        
+        function showCertificateMenu() {
+            const menu = `
+                <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" id="secretMenu">
+                    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+                        <h3 class="text-xl font-bold text-center mb-4">🕵️ Secret Certificate Collection 🕵️</h3>
+                        <p class="text-sm text-gray-600 text-center mb-4">You've discovered the hidden death certificates!</p>
+                        <div class="grid grid-cols-2 gap-2 mb-4">
+                            <button onclick="showCertificate(0); hideSecretMenu();" class="px-3 py-2 bg-gray-800 hover:bg-gray-900 text-white text-xs rounded">📜 Sir Wilbert III</button>
+                            <button onclick="showCertificate(1); hideSecretMenu();" class="px-3 py-2 bg-red-800 hover:bg-red-900 text-white text-xs rounded">🥀 Lady Rosalind</button>
+                            <button onclick="showCertificate(2); hideSecretMenu();" class="px-3 py-2 bg-green-800 hover:bg-green-900 text-white text-xs rounded">🌵 Spike McPrickles</button>
+                            <button onclick="showCertificate(3); hideSecretMenu();" class="px-3 py-2 bg-purple-800 hover:bg-purple-900 text-white text-xs rounded">🌸 Petunia Dramatic</button>
+                            <button onclick="showCertificate(4); hideSecretMenu();" class="px-3 py-2 bg-blue-800 hover:bg-blue-900 text-white text-xs rounded">🌿 Professor Fernsworth</button>
+                            <button onclick="showCertificate(5); hideSecretMenu();" class="px-3 py-2 bg-yellow-800 hover:bg-yellow-900 text-white text-xs rounded">🌻 Sunny Disposition</button>
+                        </div>
+                        <div class="text-center space-y-2">
+                            <button onclick="showRandomCertificate(); hideSecretMenu();" class="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white text-sm rounded">🎲 Random Certificate</button>
+                            <br>
+                            <button onclick="hideSecretMenu();" class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white text-sm rounded">Close</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', menu);
+        }
+        
+        function hideSecretMenu() {
+            const menu = document.getElementById('secretMenu');
+            if (menu) {
+                menu.remove();
+            }
+        }
+        
+        function showCertificate(index = 0) {
+            const cert = certificates[index];
+            
+            // Set current date as death date
+            const today = new Date();
+            document.getElementById('deathDate').textContent = today.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Update certificate content
+            document.getElementById('certName').textContent = cert.name;
+            document.getElementById('certSpecies').textContent = cert.species;
+            document.getElementById('certBirthDate').textContent = cert.birthDate;
+            document.getElementById('certCause').textContent = cert.cause;
+            document.getElementById('certLastWords').textContent = cert.lastWords;
+            document.getElementById('certSurvivors').textContent = cert.survivors;
+            document.getElementById('certifiedBy').textContent = cert.certifiedBy;
+            document.getElementById('certSeal').textContent = cert.seal;
+            document.getElementById('certNumber').textContent = cert.certNumber;
+            
+            document.getElementById('certificateModal').classList.remove('hidden');
+        }
+        
+        function showRandomCertificate() {
+            const randomIndex = Math.floor(Math.random() * certificates.length);
+            showCertificate(randomIndex);
+        }
+        
+        function hideCertificate() {
+            document.getElementById('certificateModal').classList.add('hidden');
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('certificateModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideCertificate();
+            }
+        });
+        
+        // Initialize stats display
+        updateStatsDisplay();
+        
+        // Add some random plant movements and thoughts
+        setInterval(() => {
+            const plant = document.getElementById('plant');
+            const randomAction = Math.random();
+            
+            if (randomAction < 0.05) { // 5% chance - pulse
+                plant.classList.add('pulsing');
+                setTimeout(() => plant.classList.remove('pulsing'), 2000);
+            } else if (randomAction < 0.08) { // 3% chance - random mood change
+                updatePlantMood();
+            } else if (randomAction < 0.1) { // 2% chance - random thought
+                showThoughtBubble();
+            }
+        }, 3000);
+        
+        // Occasionally update stats
+        setInterval(() => {
+            if (Math.random() < 0.3) {
+                plantStats.sass = Math.max(0, Math.min(100, plantStats.sass + (Math.random() - 0.5) * 3));
+                plantStats.wisdom = Math.max(0, Math.min(100, plantStats.wisdom + (Math.random() - 0.5) * 2));
+                updateStatsDisplay();
+            }
+        }, 5000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96876b4a831d59fc',t:'MTc1NDA3MzE1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

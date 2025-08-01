@@ -1,53 +1,48 @@
 <img width="3188" height="1202" alt="frame (3)" src="https://github.com/user-attachments/assets/517ad8e9-ad22-457d-9538-a9e62d137cd7" />
 
 
-# [Project Name] 🎯
+# [The Leaf That Knows] 🎯
 
 
 ## Basic Details
-### Team Name: [Name]
-
-
-### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+### Team Member
+- Member: [Pournami Hari Lakshmi] - [LBS Institude of Technology for Women]
 
 ### Project Description
-[2-3 lines about what your project does]
+"Talk to the Partially Dead Plant" is a strange, interactive widget featuring a dead houseplant (or cactus, or eucalyptus — you choose). No matter how much you water it or what you ask, it remains beautifully lifeless.
+Each question you ask is met with a one-time, weirdly poetic (and slightly unsettling) response from the plant — and then silence
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+- Help you grow real plants 🌱
+
+- Answer seriously
+
+- Serve any actual purpose
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+Because sometimes, all you need is a partially dead plant that talks back once — and never again.
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+- [HTML,CSS,JavaScript]
+- [TailwindCSS]
+- [CSSkey frames,Pure Vanilla JS]
+- [VS Code]
 
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
 
 ### Implementation
 For Software:
-# Installation
-[commands]
-
+ VS code
 # Run
-[commands]
+[open index.html]
 
 ### Project Documentation
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
+
+![Screenshot2](Add screenshot 2 here with proper name)
 *Add caption explaining what this shows*
 
 ![Screenshot2](Add screenshot 2 here with proper name)
