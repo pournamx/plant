@@ -42,14 +42,14 @@ For Software:
 
 # Screenshots (Add at least 3)
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+<img width="1362" height="766" alt="firts" src="https://github.com/user-attachments/assets/9be48ac8-4283-42f9-a3d2-5743ff08c7af" />
+*The Leaf That Knows 🌿💀 — A virtual plant oracle that's barely surviving but full of sass, wisdom, and infinite confusion. Ask it anything… just don’t expect a relevant answer.*
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+<img width="1356" height="758" alt="second" src="https://github.com/user-attachments/assets/0bbb95f7-917f-4fb7-a82c-ad74c4ccf16c" />
+*The Leaf That Knows 🌿 — Now 'feeling sarcastic', the plant responds to life’s deepest question with peak mockery: 'Your question has the same energy as asking a fish about mountain climbing.' Sass Level: 89%, Wisdom: 86%, Confusion: ∞. Still more helpful than most advice columns.*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+<img width="1365" height="764" alt="third" src="https://github.com/user-attachments/assets/257baf52-d1e4-49e6-a057-778f20c012ec" />
+*🌻 Official Death Certificate of Sunny Disposition Sunflower — Cause of (Partial) Death: Too much positivity. Final status: PARTIALLY DECEASED, but still alive enough to dish out unsolicited advice. Last words? A cheery fun fact about sunflowers before facing the inevitable lawnmower. Certified by Dr. Sunshine, of course.*
 
 # Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
@@ -76,17 +76,26 @@ For Hardware:
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+https://github.com/user-attachments/assets/106dfa50-9224-402e-94df-313a7d0ae80e
+The video showcases a fun and quirky web project titled "The Leaf That Knows", where users can ask a plant any question. Instead of meaningful answers, the plant responds with random, unrelated, and often sarcastic "wisdom."
+
+In the video:
+
+- The user asks the plant a deep question ("What’s the meaning of life?").
+
+- The plant responds with a witty and dismissive remark.
+
+- The plant displays mood stats like Sass Level, Wisdom, and Confusion.
+
+- A hidden feature is revealed — a humorous death certificate of the plant, declaring it partially deceased due to "chronic positivity overload."
+This demonstration highlights the absurdity and humor behind the concept, making it an entertaining "useless" project with interactive elements and Easter eggs.
 
 # Additional Demos
 [Add any extra demo materials/links]
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
-
+Pournami Hari Lakshmi:
+Concept design, UI development, frontend coding, logic implementation, plant responses, and Easter egg features — all aspects were independently handled.
 ---
 Made with ❤️ at TinkerHub Useless Projects 
 
