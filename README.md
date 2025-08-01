@@ -51,19 +51,6 @@ For Software:
 <img width="1365" height="764" alt="third" src="https://github.com/user-attachments/assets/257baf52-d1e4-49e6-a057-778f20c012ec" />
 *🌻 Official Death Certificate of Sunny Disposition Sunflower — Cause of (Partial) Death: Too much positivity. Final status: PARTIALLY DECEASED, but still alive enough to dish out unsolicited advice. Last words? A cheery fun fact about sunflowers before facing the inevitable lawnmower. Certified by Dr. Sunshine, of course.*
 
-# Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
-
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
 # Build Photos
 ## 🌿 Build Photos
 
@@ -103,9 +90,6 @@ For Hardware:
 - Brings humor to life through a dying leaf
 
 ---
-
-📝 **Note**: This project was built individually by **Pournami Hari Lakshmi**, from concept to execution.
-
 
 ### Project Demo
 # Video
