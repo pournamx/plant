@@ -5,7 +5,7 @@
 
 
 ## Basic Details
-### Team Member
+### Individual Member
 - Member: [Pournami Hari Lakshmi] - [LBS Institude of Technology for Women] --
 
 ### Project Description
