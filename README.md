@@ -6,7 +6,7 @@
 
 ## Basic Details
 ### Team Member
-- Member: [Pournami Hari Lakshmi] - [LBS Institude of Technology for Women]
+- Member: [Pournami Hari Lakshmi] - [LBS Institude of Technology for Women] --
 
 ### Project Description
 "Talk to the Partially Dead Plant" is a strange, interactive widget featuring a dead houseplant (or cactus, or eucalyptus — you choose). No matter how much you water it or what you ask, it remains beautifully lifeless.
